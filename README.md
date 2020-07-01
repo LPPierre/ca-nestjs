@@ -3,6 +3,8 @@ A school project using the NestJS framework.
 
 For instructions, see [millehorde's NestJS course](https://github.com/millehorde/courses/blob/master/courses/nestjs.md#niveau-starter), niveau "Starter".
 
+---
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
