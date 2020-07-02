@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoxesController } from './boxes/boxes.controller';
 import { AppService } from './app.service';
+import { CreaturesController } from './creatures/creatures.controller';
+import { BoxesService } from './boxes/boxes.service';
+import { CreaturesService } from './creatures/creatures.service';
 
 @Module({
   imports: [
@@ -16,7 +19,7 @@ import { AppService } from './app.service';
       synchronize: true,
     }),
   ],
-  controllers: [BoxesController],
-  providers: [AppService],
+  controllers: [BoxesController, CreaturesController],
+  providers: [AppService, BoxesService, CreaturesService],
 })
 export class AppModule {}

@@ -1,8 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { BoxesService } from './boxes.service';
 import { CreateBoxDto } from './dto/create-box.dto';
 
 @Controller('boxes')
 export class BoxesController {
+  constructor(private boxesService: BoxesService) {}
+
   @Post()
   create(@Body() CreateBoxDto: CreateBoxDto): string {
     return 'This action adds a new box';
