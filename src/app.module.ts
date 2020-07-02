@@ -6,6 +6,8 @@ import { BoxesService } from './boxes/boxes.service';
 import { BoxRepository } from './boxes/box.repository';
 import { CreaturesModule } from './creatures/creatures.module';
 import { TrainerRepository } from './trainers/trainer.repository';
+import { TrainersController } from './trainers/trainers.controller';
+import { TrainersService } from './trainers/trainers.service';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { TrainerRepository } from './trainers/trainer.repository';
     TypeOrmModule.forFeature([BoxRepository, TrainerRepository]),
     CreaturesModule,
   ],
-  controllers: [BoxesController],
-  providers: [AppService, BoxesService],
+  controllers: [BoxesController, TrainersController],
+  providers: [AppService, BoxesService, TrainersService],
 })
 export class AppModule {}

@@ -6,9 +6,6 @@ import { Trainer } from '../trainers/trainer.entity';
 export class Box {
     @PrimaryGeneratedColumn()
     id: number;
-  
-    @Column()
-    label: string;
 
     @ManyToOne(type => Trainer, trainer => trainer.id)
     trainer: Trainer;

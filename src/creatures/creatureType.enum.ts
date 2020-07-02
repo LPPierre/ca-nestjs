@@ -1,6 +1,6 @@
 export enum CreatureType {
-    GRASS,
-    FIRE,
-    WATER,
-    ELECTRIC,
+    Grass = 'GRASS',
+    Fire = 'FIRE',
+    Water = 'WATER',
+    Electric = 'ELECTRIC',
 }

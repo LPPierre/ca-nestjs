@@ -10,7 +10,7 @@ export class Creature {
     name: string;
 
     @Column()
-    type: number
+    type: string
 
     @ManyToOne(type => Box, box => box.creatures)
     box: Box;
