@@ -8,12 +8,15 @@ export class CreaturesController {
   constructor(private creaturesService: CreaturesService) {}
 
   @Post()
-  create(@Body() CreateCreatureDto: CreateCreatureDto): string {
-    return 'This action adds a new creature';
+  async create(@Body() createCreatureDto: CreateCreatureDto) {
+    // return 'This action adds a new creature';
+    this.creaturesService.create(createCreatureDto);
   }
 
   @Put(':id')
-  move(@Param('id') id: string): string {
+  async move(@Param('id') id: string) {
     return 'This action removes a #${id} box';
+    // TODO
+    // this.creaturesService.move(moveCreatureDto);
   }
 }
