@@ -5,11 +5,12 @@ import { BoxesController } from './boxes/boxes.controller';
 import { BoxesService } from './boxes/boxes.service';
 import { BoxRepository } from './boxes/box.repository';
 import { CreaturesModule } from './creatures/creatures.module';
+import { TrainerRepository } from './trainers/trainer.repository';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
-    TypeOrmModule.forFeature([BoxRepository]),
+    TypeOrmModule.forFeature([BoxRepository, TrainerRepository]),
     CreaturesModule,
   ],
   controllers: [BoxesController],
