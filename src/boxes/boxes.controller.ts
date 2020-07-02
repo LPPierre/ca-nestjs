@@ -20,9 +20,8 @@ export class BoxesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): string {
-    // TODO
-    return 'This action returns a #${id} box';
+  async findOne(@Param('id') id: string): Promise<Box> {
+    return this.boxesService.findOne(id);
   }
 
   @Delete(':id')

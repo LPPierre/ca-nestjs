@@ -1,24 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { Box } from './interfaces/box.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Box } from './box.entity';
+import { BoxRepository } from './box.repository';
 
 @Injectable()
 export class BoxesService {
+  constructor(
+    @InjectRepository(Box)
+    private boxesRepository: BoxRepository,
+  ) {}
+
   private readonly boxes: Box[] = [];
 
-  create(box: Box) {
-    this.boxes.push(box);
+  async create(box: Box): Promise<Box> {
+    await this.boxesRepository.save(box);
+
+    return box;
   }
 
-  findAll(): Box[] {
-    return this.boxes;
+  async findAll(): Promise<Box[]> {
+    return this.boxesRepository.find();
   }
 
-  // TODO
-  // findOne(id: string): Box {
-  //   return box;
-  // }
+  async findOne(id: string): Promise<Box> {
+    return this.boxesRepository.findOne(id);
+  }
 
-  delete(box: Box) {
-    // TODO
+  async remove(id: string): Promise<void> {
+    await this.boxesRepository.delete(id);
   }
 }

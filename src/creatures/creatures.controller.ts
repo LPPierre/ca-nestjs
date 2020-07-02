@@ -14,8 +14,7 @@ export class CreaturesController {
   }
 
   @Put(':id')
-  async move(@Param('id') id: string) {
-    return 'This action removes a #${id} box';
+  async move(@Param('id') id: string, @Body() moveCreatureDto: MoveCreatureDto) {
     // TODO
     // this.creaturesService.move(moveCreatureDto);
   }

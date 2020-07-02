@@ -1,5 +1,9 @@
+import { Box } from 'src/boxes/box.entity';
+import { CreatureType } from '../creatureType.enum';
+
 export class CreateCreatureDto {
-    box: string;
+    readonly id: number;
     name: string;
-    type: number;
+    type: CreatureType;
+    box: Box;
 }

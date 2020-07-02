@@ -1,3 +1,6 @@
+import { Box } from 'src/boxes/box.entity';
+
 export class MoveCreatureDto {
-    box: string;
+    readonly id: number;
+    box: Box;
 }

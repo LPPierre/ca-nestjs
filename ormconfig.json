@@ -5,6 +5,6 @@
     "username": "user",
     "password": "password",
     "database": "ca-nestjs",
-    "entities": [],
+    "entities": ["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
 }
