@@ -7,16 +7,7 @@ import { CreaturesModule } from './creatures/creatures.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'user',
-      password: 'password',
-      database: 'ca-nestjs',
-      entities: [],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
     CreaturesModule,
   ],
   controllers: [BoxesController],
