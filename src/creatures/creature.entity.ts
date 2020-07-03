@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Box } from 'src/boxes/box.entity';
+import { Box } from '../boxes/box.entity';
 
 @Entity()
 export class Creature {

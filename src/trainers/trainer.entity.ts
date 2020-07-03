@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
-import { Box } from 'src/boxes/box.entity';
+import { Box } from '../boxes/box.entity';
 
 @Entity()
 export class Trainer {
