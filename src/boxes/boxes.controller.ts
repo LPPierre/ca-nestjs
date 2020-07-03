@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, ParseIntPipe, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, ParseIntPipe, Query, NotFoundException } from '@nestjs/common';
 import { BoxesService } from './boxes.service';
 import { CreateBoxDto } from './dto/create-box.dto';
 import { Box } from './box.entity';
@@ -23,7 +23,11 @@ export class BoxesController {
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: string): Promise<Box> {
-    return this.boxesService.findOne(id);
+    const box = await this.boxesService.findOne(id);
+    if (box === undefined) {
+      throw new NotFoundException(`Box ${id} not found.`);
+    }
+    return box;
   }
 
   @Delete(':id')

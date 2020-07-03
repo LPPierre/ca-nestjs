@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, NotFoundException } from '@nestjs/common';
 import { TrainersService } from './trainers.service';
 import { CreateTrainerDto } from './dto/create-trainer.dto';
 import { Trainer } from './trainer.entity';
@@ -19,6 +19,10 @@ export class TrainersController {
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Trainer> {
-    return this.trainersService.findOne(id);
+    const trainer = await this.trainersService.findOne(id);
+    if (trainer === undefined) {
+      throw new NotFoundException('Trainer ${id} not found.');
+    }
+    return trainer;
   }
 }
