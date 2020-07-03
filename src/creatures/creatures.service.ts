@@ -31,4 +31,8 @@ export class CreaturesService {
   async findAll(): Promise<Creature[]> {
     return this.creaturesRepository.find();
   }
+
+  async findByBox(boxId: number): Promise<Creature[]> {
+    return this.creaturesRepository.find({box: {id: boxId}});
+  }
 }

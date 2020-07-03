@@ -13,18 +13,23 @@ export class BoxesController {
   }
 
   @Get()
-  async findAll(@Query('trainer', ParseIntPipe) trainerId: number): Promise<Box[]> {
-    if (trainerId) {
-      // TODO this.boxesService.findByTrainer(trainerId);
-    }
-
+  async findAll(): Promise<Box[]> {
     return this.boxesService.findAll();
+  }
+
+  @Get('findByTrainer')
+  async findByTrainer(@Query('trainer', ParseIntPipe) trainerId: number): Promise<Box[]> {
+    const boxes = await this.boxesService.findByTrainer(trainerId);
+    if (!(boxes.length > 0)) {
+      throw new NotFoundException(`No boxes found for trainer ${trainerId}.`); 
+    }
+    return boxes;
   }
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: string): Promise<Box> {
     const box = await this.boxesService.findOne(id);
-    if (box === undefined) {
+    if (typeof box === undefined) {
       throw new NotFoundException(`Box ${id} not found.`);
     }
     return box;

@@ -21,7 +21,7 @@ export class TrainersController {
   async findOne(@Param('id') id: string): Promise<Trainer> {
     const trainer = await this.trainersService.findOne(id);
     if (trainer === undefined) {
-      throw new NotFoundException('Trainer ${id} not found.');
+      throw new NotFoundException(`Trainer ${id} not found.`);
     }
     return trainer;
   }

@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Put, Get, Query, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put, Get, Query, ParseIntPipe, NotFoundException } from '@nestjs/common';
 import { CreaturesService } from './creatures.service';
 import { CreateCreatureDto } from './dto/create-creature.dto';
 import { MoveCreatureDto } from './dto/move-creature.dto';
@@ -14,12 +14,17 @@ export class CreaturesController {
   }
 
   @Get()
-  async findAll(@Query('trainer', ParseIntPipe) boxId: number): Promise<Creature[]> {
-    if (boxId) {
-      // TODO return this.creaturesService.findByBox(boxId);
-    }
-
+  async findAll(): Promise<Creature[]> {
     return this.creaturesService.findAll();
+  }
+
+  @Get('findByBox')
+  async findByBox(@Query('boxId', ParseIntPipe) boxId: number): Promise<Creature[]> {
+    const creatures = await this.creaturesService.findByBox(boxId);
+    if (!(creatures.length > 0)) {
+      throw new NotFoundException(`No creatures found for box ${boxId}.`); 
+    }
+    return creatures;
   }
 
   @Put(':id')

@@ -22,6 +22,10 @@ export class BoxesService {
     return this.boxesRepository.find();
   }
 
+  async findByTrainer(trainerId: number): Promise<Box[]> {
+    return this.boxesRepository.find({trainer: {id: trainerId}});
+  }
+
   async findOne(id: string): Promise<Box> {
     return this.boxesRepository.findOne(id);
   }
