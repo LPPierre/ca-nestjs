@@ -13,21 +13,19 @@ export class CreaturesService {
 
   private readonly creatures: Creature[] = [];
 
-  async create(creature: Creature): Promise<Creature> {
+  async create(creature: Creature) {
+    // TODO Validation
+  
     await this.creaturesRepository.save(creature);
-
-    return creature;
   }
 
-  async move(creature: Creature, box: Box): Promise<Creature> {
-    // TODO Check box availability (size + types)
+  async changeBox(creature: Creature, box: Box) {
+    // TODO Validation : check box availability (size + types)
   
     await this.creaturesRepository.save({
       id: creature.id,
       box: box
     });
-
-    return creature;
   }
     
   async findAll(): Promise<Creature[]> {

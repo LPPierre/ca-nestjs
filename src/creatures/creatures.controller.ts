@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Put, Get } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put, Get, Query, ParseIntPipe } from '@nestjs/common';
 import { CreaturesService } from './creatures.service';
 import { CreateCreatureDto } from './dto/create-creature.dto';
 import { MoveCreatureDto } from './dto/move-creature.dto';
@@ -10,18 +10,21 @@ export class CreaturesController {
 
   @Post()
   async create(@Body() createCreatureDto: CreateCreatureDto) {
-    // return 'This action adds a new creature';
     this.creaturesService.create(createCreatureDto);
   }
 
   @Get()
-  async findAll(): Promise<Creature[]> {
+  async findAll(@Query('trainer', ParseIntPipe) boxId: number): Promise<Creature[]> {
+    if (boxId) {
+      // TODO return this.creaturesService.findByBox(boxId);
+    }
+
     return this.creaturesService.findAll();
   }
 
   @Put(':id')
-  async move(@Param('id') id: string, @Body() moveCreatureDto: MoveCreatureDto) {
+  async changeBox(@Param('id') id: string, @Body() moveCreatureDto: MoveCreatureDto) {
     // TODO
-    // this.creaturesService.move(moveCreatureDto);
+    // this.creaturesService.changeBox(moveCreatureDto);
   }
 }
