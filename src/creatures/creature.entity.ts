@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Box } from '../boxes/box.entity';
 
 @Entity()
@@ -12,6 +12,10 @@ export class Creature {
     @Column()
     type: string
 
+    @Column()
+    boxId: number;
+
     @ManyToOne(type => Box, box => box.creatures)
+    @JoinColumn({name: 'boxId', referencedColumnName: 'id'})
     box: Box;
 }

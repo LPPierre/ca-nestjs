@@ -19,12 +19,12 @@ export class CreaturesService {
     await this.creaturesRepository.save(creature);
   }
 
-  async changeBox(creature: Creature, box: Box) {
+  async updateBox(creature: Creature) {
     // TODO Validation: check box availability (size + types)
-  
+
     await this.creaturesRepository.save({
       id: creature.id,
-      box: box
+      box: creature.box
     });
   }
     

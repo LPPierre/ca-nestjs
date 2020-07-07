@@ -1,6 +1,6 @@
 import { Box } from 'src/boxes/box.entity';
 import { CreatureType } from '../creatureType.enum';
-import { IsString } from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 
 // TODO Remove dependency to 'src/boxes'
 
@@ -12,6 +12,9 @@ export class CreateCreatureDto {
 
     @IsString()
     type: CreatureType;
+
+    @IsNumber()
+    boxId: number;
 
     box: Box;
 }
