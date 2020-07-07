@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, ParseIntPipe, Query, NotFou
 import { BoxesService } from './boxes.service';
 import { CreateBoxDto } from './dto/create-box.dto';
 import { Box } from './box.entity';
-import { CreaturesService } from 'src/creatures/creatures.service';
-import { Creature } from 'src/creatures/creature.entity';
+import { CreaturesService } from '../creatures/creatures.service';
+import { Creature } from '../creatures/creature.entity';
 
 @Controller('boxes')
 export class BoxesController {
