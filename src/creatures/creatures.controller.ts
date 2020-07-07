@@ -18,15 +18,6 @@ export class CreaturesController {
     return this.creaturesService.findAll();
   }
 
-  @Get('findByBox')
-  async findByBox(@Query('boxId', ParseIntPipe) boxId: number): Promise<Creature[]> {
-    const creatures = await this.creaturesService.findByBox(boxId);
-    if (!(creatures.length > 0)) {
-      throw new NotFoundException(`No creatures found for box ${boxId}.`); 
-    }
-    return creatures;
-  }
-
   @Put(':id')
   async changeBox(@Param('id') id: string, @Body() moveCreatureDto: MoveCreatureDto) {
     // TODO

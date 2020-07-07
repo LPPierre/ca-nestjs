@@ -1,11 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, NotFoundException, ParseIntPipe } from '@nestjs/common';
 import { TrainersService } from './trainers.service';
 import { CreateTrainerDto } from './dto/create-trainer.dto';
 import { Trainer } from './trainer.entity';
+import { Box } from '../boxes/box.entity';
+import { BoxesService } from 'src/boxes/boxes.service';
 
 @Controller('trainers')
 export class TrainersController {
-  constructor(private trainersService: TrainersService) {}
+  constructor(private trainersService: TrainersService, private boxesService: BoxesService) {}
 
   @Post()
   async create(@Body() createTrainerDto: CreateTrainerDto) {
@@ -18,11 +20,20 @@ export class TrainersController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Trainer> {
+  async findOne(@Param('id', ParseIntPipe) id: string): Promise<Trainer> {
     const trainer = await this.trainersService.findOne(id);
     if (trainer === undefined) {
       throw new NotFoundException(`Trainer ${id} not found.`);
     }
     return trainer;
+  }
+
+  @Get(':id/boxes')
+  async findTrainerBoxes(@Param('id', ParseIntPipe) id: number): Promise<Box[]> {
+    const boxes = await this.boxesService.findByTrainer(id);
+    if (!(boxes.length > 0)) {
+      throw new NotFoundException(`No boxes found for trainer ${id}.`); 
+    }
+    return boxes;
   }
 }
