@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, ParseIntPipe, Query, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, ParseIntPipe, Query, NotFoundException, ValidationPipe, UsePipes } from '@nestjs/common';
 import { BoxesService } from './boxes.service';
 import { CreateBoxDto } from './dto/create-box.dto';
 import { Box } from './box.entity';
@@ -10,6 +10,7 @@ export class BoxesController {
   constructor(private boxesService: BoxesService, private creaturesService: CreaturesService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe())
   async create(@Body() createBoxDto: CreateBoxDto) {
     this.boxesService.create(createBoxDto);
   }
@@ -20,7 +21,7 @@ export class BoxesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: string): Promise<Box> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Box> {
     const box = await this.boxesService.findOne(id);
     if (typeof box === undefined) {
       throw new NotFoundException(`Box ${id} not found.`);
@@ -38,9 +39,8 @@ export class BoxesController {
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: string): Promise<void> {
+  remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     // TODO Validation
-
     return this.boxesService.remove(id);
   }
 }

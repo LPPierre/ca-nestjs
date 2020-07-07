@@ -20,7 +20,7 @@ export class CreaturesService {
   }
 
   async changeBox(creature: Creature, box: Box) {
-    // TODO Validation : check box availability (size + types)
+    // TODO Validation: check box availability (size + types)
   
     await this.creaturesRepository.save({
       id: creature.id,
@@ -30,6 +30,10 @@ export class CreaturesService {
     
   async findAll(): Promise<Creature[]> {
     return this.creaturesRepository.find();
+  }
+
+  async findOne(id: number): Promise<Creature> {
+    return this.creaturesRepository.findOne(id);
   }
 
   async findByBox(boxId: number): Promise<Creature[]> {

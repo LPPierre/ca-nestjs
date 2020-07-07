@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, NotFoundException, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, NotFoundException, ParseIntPipe, ValidationPipe, UsePipes } from '@nestjs/common';
 import { TrainersService } from './trainers.service';
 import { CreateTrainerDto } from './dto/create-trainer.dto';
 import { Trainer } from './trainer.entity';
@@ -10,6 +10,7 @@ export class TrainersController {
   constructor(private trainersService: TrainersService, private boxesService: BoxesService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe())
   async create(@Body() createTrainerDto: CreateTrainerDto) {
     this.trainersService.create(createTrainerDto);
   }

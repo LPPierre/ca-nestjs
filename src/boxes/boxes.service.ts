@@ -26,11 +26,12 @@ export class BoxesService {
     return this.boxesRepository.find({trainer: {id: trainerId}});
   }
 
-  async findOne(id: string): Promise<Box> {
+  async findOne(id: number): Promise<Box> {
     return this.boxesRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
+    // TODO Validation: box must be empty
     await this.boxesRepository.delete(id);
   }
 }
