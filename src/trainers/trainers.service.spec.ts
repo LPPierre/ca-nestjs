@@ -1,12 +1,30 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { TrainersService } from './trainers.service';
+import { Module } from '@nestjs/common';
 
 export class TrainersServiceMock {
-    getTrainer(firstname: string, lastname: string) {
+    findAll() {
+        return [
+            {
+                id: 1,
+                firstName: 'Pierre',
+                lastName: 'Le Page',
+                boxes: [],
+            },
+            {
+                id: 2,
+                firstName: 'Jean',
+                lastName: 'Dupont',
+                boxes: [],
+            }
+        ]
+    };
+
+    findOne() {
         return {
-            firstName: 'Foo',
-            lastName: 'Bar',
+            id: 1,
+            firstName: 'Pierre',
+            lastName: 'Le Page',
             boxes: [],
-        }
+        };
     };
 }

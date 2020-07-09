@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, HttpStatus } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppController } from './../src/app.controller';
 import { AppService } from './../src/app.service';
@@ -21,11 +21,11 @@ describe('AppController (e2e)', () => {
   it('/ (GET)', () => {
     return request(app.getHttpServer())
       .get('/')
-      .expect(404)
+      .expect(HttpStatus.NOT_FOUND)
       .expect('{"statusCode":404,"message":"Cannot GET /","error":"Not Found"}');
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await app.close();
   });
 });
