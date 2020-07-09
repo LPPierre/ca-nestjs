@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const TrainersList = () => {
   const [trainers, setTrainers] = useState([]);
-  // const [url, setUrl] = useState('localhost:3001/trainers');
+  const [url, setUrl] = useState('localhost:3001/trainers');
+
+  useEffect(()=>{
+    axios.get(url).then(({data: {id, firstName, lastName}})=>{
+      setTrainers({id: id, firstName: firstName, lastName: lastName})
+    })
+  }, [url])
 
   return (
     <div>

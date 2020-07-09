@@ -9,6 +9,10 @@ A local PostgreSQL database with the following settings:
 - Password : `password`
 - Database : `ca-nestjs`
 
+## Instructions
+1. From **back-nestjs** (back-end), run the command `nest run` (Port 3001).
+2. From **front-react** (front-end), run the command `npm run` (Port 3000).
+
 ---
 
 <p align="center">
