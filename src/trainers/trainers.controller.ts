@@ -3,7 +3,7 @@ import { TrainersService } from './trainers.service';
 import { CreateTrainerDto } from './dto/create-trainer.dto';
 import { Trainer } from './trainer.entity';
 import { Box } from '../boxes/box.entity';
-import { BoxesService } from 'src/boxes/boxes.service';
+import { BoxesService } from '../boxes/boxes.service';
 
 @Controller('trainers')
 export class TrainersController {

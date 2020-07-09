@@ -3,7 +3,7 @@ import { CreaturesService } from './creatures.service';
 import { CreateCreatureDto } from './dto/create-creature.dto';
 import { MoveCreatureDto } from './dto/move-creature.dto';
 import { Creature } from './creature.entity';
-import { BoxesService } from 'src/boxes/boxes.service';
+import { BoxesService } from '../boxes/boxes.service';
 
 @Controller('creatures')
 export class CreaturesController {

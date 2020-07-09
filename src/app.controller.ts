@@ -1,13 +1,4 @@
-import { Controller, Get, Redirect } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller } from '@nestjs/common';
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  @Redirect('/boxes')
-  index(): string {
-    return '';
-  }
-}
+export class AppController {}
