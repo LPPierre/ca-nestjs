@@ -3,16 +3,21 @@ import axios from 'axios';
 
 const TrainersList = () => {
   const [trainers, setTrainers] = useState([]);
-  const [url, setUrl] = useState('localhost:3001/trainers');
+  const [url, setUrl] = useState('http://localhost:3001/trainers');
 
   useEffect(()=>{
-    axios.get(url).then(({data: {id, firstName, lastName}})=>{
-      setTrainers({id: id, firstName: firstName, lastName: lastName})
-    })
+    axios.get(url, {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:3001'
+    }).then(response => {
+      response.data.forEach(trainer => {
+        setTrainers(trainers => [...trainers, trainer])
+      });
+    });
   }, [url])
 
   return (
-    <div>
+    <div className="TrainersList">
       <h3>Trainers</h3>
       <ul>
         {trainers.map(trainer => (

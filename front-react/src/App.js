@@ -3,9 +3,8 @@ import './App.css';
 import TrainersList from './components/TrainersList';
 
 function App() {
-  return (
-    <div className="App"><TrainersList/></div>
-  );
+  // Entry point shows the list of trainers
+  return (<div className="App"><TrainersList/></div>);
 }
 
 export default App;
