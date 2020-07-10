@@ -1,14 +1,16 @@
-import { IsArray, IsString } from "class-validator";
+import { IsArray, IsString, IsEmpty, IsNotEmpty } from "class-validator";
 
 export class CreateTrainerDto {
     readonly id: number;
 
     @IsString()
+    @IsNotEmpty()
     firstName: string;
 
     @IsString()
+    @IsNotEmpty()
     lastName: string;
 
-    @IsArray()
+    @IsEmpty()
     boxes: [];
 }
