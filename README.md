@@ -10,8 +10,9 @@ A local PostgreSQL database with the following settings:
 - Database : `ca-nestjs`
 
 ## Instructions
-1. From **back-nestjs** (back-end), run the command `nest run` (Port 3001).
-2. From **front-react** (front-end), run the command `npm run` (Port 3000).
+1. From **back-nestjs** (back-end), run the command `nest run` to serve the API (port 3001).
+2. Run the command `npx compodoc -s` to serve the documentation (port 8080). 
+3. From **front-react** (front-end), run the command `npm run` (port 3000).
 
 ---
 
