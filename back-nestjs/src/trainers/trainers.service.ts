@@ -19,10 +19,10 @@ export class TrainersService {
   }
 
   async findAll(): Promise<Trainer[]> {
-    return this.trainersRepository.find();
+    return this.trainersRepository.find({relations: ['boxes']});
   }
 
   async findOne(id: string): Promise<Trainer> {
-    return this.trainersRepository.findOne(id);
+    return this.trainersRepository.findOne({where: id, relations: ['boxes']});
   }
 }

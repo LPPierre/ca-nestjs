@@ -4,15 +4,14 @@ import BoxesList from './BoxesList';
 
 const TrainersList = () => {
   const [trainers, setTrainers] = useState([]);
-  const [url, setUrl] = useState('http://localhost:3001/trainers');
+  const [apiUrl, setApiUrl] = useState('http://localhost:3001/trainers');
   // TODO Handle form validation messages
   const [addTrainerErrors, setAddTrainerErrors] = useState(undefined);
   const [boxesListData] = useState(undefined);
 
-  const [newTrainer, setNewTrainer] = useState({
-    firstName: '',
-    lastName: '',
-  });
+  const initTrainer = {firstName: '', lastName: ''};
+  const apiConfig = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3001'}
+  const [newTrainer, setNewTrainer] = useState(initTrainer);
 
   const handleChange = event => {
       setNewTrainer({...newTrainer, [event.target.name]: event.target.value})
@@ -20,27 +19,23 @@ const TrainersList = () => {
 
   const handleSubmit = event => {
       event.preventDefault();
-      axios.post(url, newTrainer, {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3001',
-      }).then(response => {
+      axios.post(apiUrl, newTrainer, apiConfig).then(response => {
         setTrainers(trainers => [...trainers, newTrainer])
+        setNewTrainer(initTrainer)
       }).catch(error => {
+        console.log(error)
         // TODO Handle form validation messages
         // setAddTrainerErrors(error)
       });
   };
 
   useEffect(()=>{
-    axios.get(url, {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:3001',
-    }).then(response => {
+    axios.get(apiUrl, apiConfig).then(response => {
       response.data.forEach(trainer => {
         setTrainers(trainers => [...trainers, trainer])
       });
     });
-  }, [url])
+  }, [apiUrl])
 
   return (
     <div className="TrainersList">
@@ -59,16 +54,24 @@ const TrainersList = () => {
           <input type="submit" value="Ajouter"/>
         </form>
       </div>
-      <ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Boites</th>
+          </tr>
+        </thead>
+        <tbody>
         {trainers.map(trainer => (
-          <div>
-            <li key={trainer.id}>{trainer.firstName}&nbsp;{trainer.lastName}</li>
-            <button>Afficher les boites</button>
-            {/* {trainers.boxes.length} boxes. */}
-            {boxesListData !== undefined ? <BoxesList trainer={trainer.id}/> : ''}
-          </div>
+          <tr key={trainer.id}>
+            <td>{trainer.firstName}&nbsp;{trainer.lastName}</td>
+            <td>
+              <button>Afficher ({trainer.boxes.length})</button>
+            </td>
+          </tr>
         ))}
-      </ul>
+        </tbody>
+      </table>
     </div>
   );
 };

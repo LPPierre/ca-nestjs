@@ -19,7 +19,7 @@ export class BoxesService {
   }
 
   async findAll(): Promise<Box[]> {
-    return this.boxesRepository.find();
+    return this.boxesRepository.find({relations: ['creatures']});
   }
 
   async findByTrainer(trainerId: number): Promise<Box[]> {
