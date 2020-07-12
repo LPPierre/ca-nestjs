@@ -1,5 +1,5 @@
 import { Trainer } from "src/trainers/trainer.entity";
-import { IsString, IsArray, ArrayMaxSize } from 'class-validator';
+import { IsArray, ArrayMaxSize } from 'class-validator';
 import { Creature } from 'src/creatures/creature.entity';
 
 export class CreateBoxDto {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BoxesList from './BoxesList';
+import { Breadcrumb, Container, Card, Button, Form, Table, Col, Row } from 'react-bootstrap';
 
 const TrainersList = () => {
   const [trainers, setTrainers] = useState([]);
@@ -38,41 +39,58 @@ const TrainersList = () => {
   }, [apiUrl])
 
   return (
-    <div className="TrainersList">
-      <h3>Dresseurs</h3>
-      <div className="AddTrainerForm">
-        <h5>Ajouter un dresseur</h5>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Prénom:
-            <input type="text" name="firstName" onChange={handleChange} value={newTrainer.firstName}/>
-          </label>
-          <label>
-            Nom:
-            <input type="text" name="lastName" onChange={handleChange} value={newTrainer.lastName}/>
-          </label>
-          <input type="submit" value="Ajouter"/>
-        </form>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Boites</th>
-          </tr>
-        </thead>
-        <tbody>
-        {trainers.map(trainer => (
-          <tr key={trainer.id}>
-            <td>{trainer.firstName}&nbsp;{trainer.lastName}</td>
-            <td>
-              <button>Afficher ({trainer.boxes.length})</button>
-            </td>
-          </tr>
-        ))}
-        </tbody>
-      </table>
-    </div>
+    <Container className="TrainersList">
+      <Breadcrumb>
+        <Breadcrumb.Item href="#">Dresseurs</Breadcrumb.Item>
+      </Breadcrumb>
+      <Row>
+        <Col xs={8}>
+          <Card>
+            <Card.Header>Dresseurs</Card.Header>
+            <Card.Body>
+              <Table striped bordered size="sm">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Boites</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {trainers.map(trainer => (
+                  <tr key={trainer.id}>
+                    <td>{trainer.id}</td>
+                    <td>{trainer.firstName}&nbsp;{trainer.lastName}</td>
+                    <td>
+                      <Button>Afficher ({trainer.boxes.length})</Button>
+                    </td>
+                  </tr>
+                ))}
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col>
+          <Card>
+            <Card.Header>Ajouter un dresseur</Card.Header>
+            <Card.Body>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                  <Form.Label>Prénom</Form.Label>
+                  <Form.Control type="text" value={newTrainer.firstName} onChange={handleChange}/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Nom</Form.Label>
+                  <Form.Control type="text" value={newTrainer.firstName} onChange={handleChange}/>
+                </Form.Group>
+                <Button variant="primary" type="submit">Ajouter</Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
