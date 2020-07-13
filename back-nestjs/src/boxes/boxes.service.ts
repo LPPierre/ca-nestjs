@@ -19,11 +19,11 @@ export class BoxesService {
   }
 
   async findAll(): Promise<Box[]> {
-    return this.boxesRepository.find({relations: ['creatures']});
+    return this.boxesRepository.find({relations: ['trainer', 'creatures']});
   }
 
   async findByTrainer(trainerId: number): Promise<Box[]> {
-    return this.boxesRepository.find({trainer: {id: trainerId}});
+    return this.boxesRepository.find({relations: ['creatures'], where: {trainer: trainerId}});
   }
 
   async findOne(id: number): Promise<Box> {

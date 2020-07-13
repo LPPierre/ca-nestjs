@@ -7,11 +7,19 @@ import { Creature } from '../creatures/creature.entity';
 
 @Controller('boxes')
 export class BoxesController {
+  trainersService: any;
   constructor(private boxesService: BoxesService, private creaturesService: CreaturesService) {}
 
   @Post()
   @UsePipes(new ValidationPipe())
   async create(@Body() createBoxDto: CreateBoxDto) {
+    const trainerId = createBoxDto.trainerId;
+    const trainer = await this.trainersService.findOne(trainerId);
+    if (typeof trainer === undefined) {
+      throw new NotFoundException(`Trainer ${trainerId} not found`)
+    }
+
+    createBoxDto.trainer = trainer;
     this.boxesService.create(createBoxDto);
   }
 

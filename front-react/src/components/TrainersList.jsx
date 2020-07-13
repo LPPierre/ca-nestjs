@@ -12,16 +12,15 @@ import {
 } from 'react-router-dom';
 
 const TrainersList = () => {
-  const [trainers, setTrainers] = useState([]);
   const [apiUrl, setApiUrl] = useState('http://localhost:3001/trainers');
-  // TODO Handle form validation messages
-  const [addTrainerErrors, setAddTrainerErrors] = useState(undefined);
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const initTrainer = {firstName: undefined, lastName: undefined};
   const apiConfig = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3001'}
+  const [isLoading, setIsLoading] = useState(true);
+  const [trainers, setTrainers] = useState([]);
+
+  // TODO Handle form validation messages
+  const initTrainer = {firstName: undefined, lastName: undefined};
   const [newTrainer, setNewTrainer] = useState(initTrainer);
+  const [addTrainerErrors, setAddTrainerErrors] = useState(undefined);
 
   const handleChange = event => {
     setNewTrainer({...newTrainer, [event.target.id]: event.target.value})
@@ -52,7 +51,7 @@ const TrainersList = () => {
   return (
     <Container className="TrainersList">
       <Breadcrumb>
-        <Breadcrumb.Item href="#">Dresseurs</Breadcrumb.Item>
+        <Breadcrumb.Item active href="#">Dresseurs</Breadcrumb.Item>
       </Breadcrumb>
       <Row>
         <Col xs={8}>
@@ -80,7 +79,7 @@ const TrainersList = () => {
                     <td>{trainer.firstName}&nbsp;{trainer.lastName}</td>
                     <td>
                       {trainer.boxes !== undefined && trainer.boxes.length > 0 &&
-                        <Button size="sm" href={`/${trainer.id}`}>Afficher ({trainer.boxes.length})</Button>
+                        <Button size="sm" href={`/trainer/${trainer.id}`}>Afficher ({trainer.boxes.length})</Button>
                       }
                       {(trainer.boxes === undefined || trainer.boxes.length === 0) &&
                         <Button size="sm">Créer</Button>
